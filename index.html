@@ -2,17 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viofuse Privacy Policy</title>
-    <style>body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }</style>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 750px; margin: 50px auto; padding: 0 20px; line-height: 1.6; color: #333; }
+        h1 { font-size: 2.2rem; margin-bottom: 5px; color: #111; }
+        .subtitle { font-size: 1.2rem; color: #666; margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        h2 { font-size: 1.4rem; color: #007aff; margin-top: 35px; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px; }
+        h3 { font-size: 1.1rem; color: #222; margin-top: 20px; margin-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+        th, td { text-align: left; padding: 12px; border: 1px solid #ddd; }
+        th { background-color: #f8f9fa; font-weight: 600; }
+        code { background-color: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; color: #d63384; }
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; color: #777; font-size: 0.85rem; }
+    </style>
 </head>
 <body>
-    <h1>Privacy Policy for Viofuse</h1>
-    <p><strong>Effective Date:</strong> August 30, 2026</p>
-    <h3>1. Information We Collect via Google Services</h3>
-    <p>When you connect your Google Account to Viofuse to utilize the synchronized media streaming features, our application requests access via official Google OAuth APIs to interface with your Google Photos library.</p>
-    <h3>2. How We Use Your Data</h3>
-    <p>Viofuse does not store your Google Photos files, images, or library metadata on our servers. All media data is processed on-device or streamed transiently during active shared viewing sessions.</p>
-    <h3>3. Contact Us</h3>
-    <p>support@viofuse.com</p>
+
+    <h1>Privacy Policy</h1>
+    <div class="subtitle">How Viofuse handles your data</div>
+
+    <p>Viofuse moves video files from your Photos, iCloud, Google Drive, or Google Photos straight to your own YouTube channel. This page explains exactly what the app touches along the way, and what it doesn't.</p>
+
+    <h2>01. Overview</h2>
+    <p>Viofuse is a native mobile app that helps you back up and publish video files to YouTube from wherever they already live on your device or in your cloud accounts. It is built and operated by an independent developer, not a company with a separate data-processing arm — the same person who writes the code operates the backend described below.</p>
+    <p>The short version: your video files travel directly from their source to YouTube's servers. Viofuse's own backend never stores or streams the video content itself — only the small amount of metadata (titles, timestamps, upload status) needed to show you a history of what you've uploaded.</p>
+
+    <h2>02. Data We Process</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>What it includes</th>
+                <th>Why</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Account identity</strong></td>
+                <td>Email address, YouTube channel name — read once via Google's own APIs after you sign in</td>
+                <td>Show you which account is connected; personalize the app</td>
+            </tr>
+            <tr>
+                <td><strong>Authentication tokens</strong></td>
+                <td>Google OAuth access & refresh tokens, Supabase session tokens</td>
+                <td>Keep you signed in without re-entering credentials on every launch</td>
+            </tr>
+            <tr>
+                <td><strong>Video file content</strong></td>
+                <td>The video bytes themselves, read from the source you select</td>
+                <td>Streamed directly to YouTube as the upload — this is the app's core function</td>
+            </tr>
+            <tr>
+                <td><strong>Upload metadata</strong></td>
+                <td>Filename, file size, duration, chosen title/description/privacy, resulting YouTube video ID, processing status</td>
+                <td>Show your upload queue and history; resume interrupted uploads</td>
+            </tr>
+            <tr>
+                <td><strong>Source connection state</strong></td>
+                <td>Which sources (Photos, iCloud, Drive, Google Photos) you've connected, and your auto-sync preferences per source</td>
+                <td>Remember your settings across sessions and devices</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Viofuse does not include advertising or analytics SDKs, does not track you across other apps or websites, and does not sell or rent any data to anyone, under any circumstances.</p>
+
+    <h2>03. Google Account Access</h2>
+    <p>When you sign in with Google, you're asked to grant specific, individually-listed permissions (Google calls these "scopes"). Viofuse only requests what each feature actually needs:</p>
+    
+    <ul>
+        <li><code>youtube.upload</code>: Upload videos to your own YouTube channel. This is the app's core function — without it, Viofuse cannot operate.</li>
+        <li><code>youtube</code>: Read your channel name, set the privacy status on videos you upload, and create or add videos to playlists when you use auto-organization presets.</li>
+        <li><code>photoslibrary.readonly</code>: Optional, off by default. Powers an in-app album browser for selecting videos directly from your Google Photos library, as an alternative to Google's own picker.</li>
+        <li><code>photospicker.mediaitems.readonly</code>: Lets you select videos through Google's own secure picker interface. Viofuse only ever receives the specific items you choose in that picker — never open-ended library access.</li>
+        <li><code>userinfo.email</code>: Shows which Google account is currently signed in, inside the app's own Settings screen.</li>
+    </ul>
+    <p>Viofuse deliberately does not request Google Drive scope access. Drive files can be selected only through system-level file pickers that never hand Viofuse a standing grant to your Drive.</p>
+
+    <h2>04. Where Your Data Lives</h2>
+    <h3>On your device</h3>
+    <p>Authentication tokens and your account email are stored in iOS Keychain, the operating system's encrypted credential store — the same mechanism iOS itself uses for passwords. This data never leaves your device except as part of the API calls described below.</p>
+    <h3>In transit, to YouTube</h3>
+    <p>Video files are streamed in chunks directly from your device to YouTube's resumable upload endpoint over an encrypted connection. Viofuse's own servers are never in that path — the app is a client of YouTube's API, not an intermediary that receives your video first.</p>
+    <h3>In Viofuse's backend (optional)</h3>
+    <p>If you sign in with a full account (rather than using the app as a guest), upload metadata and source-connection preferences are synced to a Supabase-hosted database so your history is available if you reinstall the app or move to another device. Every row is scoped to your account with row-level security — no other user's account can query your data, including by Viofuse's own infrastructure short of direct database administration.</p>
+
+    <h2>05. Sharing & Third Parties</h2>
+    <p>Viofuse shares data with exactly two categories of third party, both acting on your direct instruction, not Viofuse's:</p>
+    <ul>
+        <li><strong>Google</strong> — YouTube Data API, Google Photos Library/Picker API. You authorize this access yourself through Google's own consent screen, and can revoke it at any time from your Google Account permissions page.</li>
+        <li><strong>Supabase</strong> — the database host for the optional backend described above. Supabase processes this data solely to store and serve it back to your own signed-in session; it is not used for any purpose beyond that.</li>
+    </ul>
+    <p>In plain terms: Nobody sees your videos except YouTube, because YouTube is where you're publishing them. Viofuse doesn't have a copy to share even if it wanted to.</p>
+
+    <h2>06. Retention & Deletion</h2>
+    <p>Local tokens and cached data are removed from your device immediately when you sign out. Backend-synced data (upload history, source preferences) is retained for as long as your account exists, so your history survives a reinstall.</p>
+    <p>To request permanent deletion of your backend account data, contact us using the details below — requests are processed within 30 days.</p>
+
+    <h2>07. Your Controls</h2>
+    <ul>
+        <li>Disconnect any individual source (Photos, iCloud, Drive, Google Photos) at any time from the Sources screen, independent of your Google sign-in.</li>
+        <li>Turn off auto-sync per source — nothing uploads automatically unless you've explicitly enabled it for that source.</li>
+        <li>Revoke Viofuse's Google access entirely from myaccount.google.com/permissions, independent of using the app.</li>
+        <li>Sign out to clear all local credentials immediately.</li>
+    </ul>
+
+    <h2>08. Children's Privacy</h2>
+    <p>Viofuse is not directed at children under 13, and we do not knowingly collect personal information from them. If you believe a child has provided us data, contact us and we'll remove it.</p>
+
+    <h2>09. Changes to This Policy</h2>
+    <p>If this policy changes in a way that materially affects how your data is handled, the last reviewed state at the top of this page will update, and significant changes will be noted in the app's release notes.</p>
+
+    <h2>10. Contact</h2>
+    <p>Questions about this policy, or requests to access or delete your data, can be sent directly to: <strong>privacy@viofuse.com</strong></p>
+
+    <div class="footer">
+        Last updated: August 31, 2026 | Viofuse Official Documentation
+    </div>
+
 </body>
 </html>
